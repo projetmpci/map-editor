@@ -1,0 +1,18 @@
+def créer_une_matrice(largeur, hauteur):
+    """crée une matrice avec des 0 partout"""
+    matrice = [largeur * [0]] * hauteur
+    return matrice
+
+
+def placer_mur_horizontal(numéro_ligne, colonne_de_départ, longueur, board):
+    """ écrit des 1 pour représenter des murs en commençant par la gauche"""
+    ligne = board[numéro_ligne]
+    longueur_ligne = len(ligne)
+    if longueur_ligne < longueur + colonne_de_départ:
+        return "longeur matrice excédée"
+    ligne_changée = ligne[:colonne_de_départ]
+    for i in range(longueur):
+        ligne_changée += [1]
+    ligne_changée = ligne_changée + [0] * ((longueur_ligne - colonne_de_départ) - longueur)
+    grille = board[:numéro_ligne] + [ligne_changée] + board[numéro_ligne + 1:]
+    return grille
