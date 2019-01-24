@@ -1,0 +1,46 @@
+
+
+def matrice(colonne,ligne):
+    lst = [[0] * ligne for i in range(colonne)]
+    return lst
+
+
+def affiche_tableau(lst):
+    for i in lst:
+        for j in i:
+            if j==1:
+                print("\033[31m*\033[0m","",end="")
+            elif j==2:
+                print("\033[31m#\033[0m","",end="")
+            elif j=='@':
+                print("\033[32m@\033[0m", "", end="")
+            else :
+                print("\033[30m0\033[0m", "", end="")
+        print()
+
+
+def placer_mur(direction, longueur, position_x_départ, position_y_départ, matrice):
+    """g pour direction gauche, d pour direction droite, h pour haut et b pour bas"""
+    if direction == "d" :
+        for i in range(longueur):
+            matrice[position_y_départ][position_x_départ + i] = 2
+    elif direction == "g" :
+        for i in range(longueur):
+            matrice[position_y_départ][position_x_départ - i] = 2
+    elif direction == "h" :
+        for i in range(longueur):
+            matrice[position_y_départ - i][position_x_départ] = 2
+    elif direction == "b" :
+        for i in range(longueur):
+            matrice[position_y_départ + i][position_x_départ] = 2
+
+
+def placer_rectangle(hauteur, largeur, position_x_départ, position_y_départ, matrice):
+    placer_mur("b", hauteur, position_x_départ, position_y_départ, matrice)
+    placer_mur("b", hauteur+1, position_x_départ + largeur, position_y_départ, matrice)
+    placer_mur("d", largeur, position_x_départ, position_y_départ, matrice)
+    placer_mur("d", largeur, position_x_départ, position_y_départ + hauteur, matrice)
+
+
+
+
